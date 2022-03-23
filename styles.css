@@ -1,4 +1,16 @@
+body {
+    font-size: 25px;
+    font-family: sans-serif;
+    background-color: azure;
+}
 img {
     width: 25%;
     margin: 200px;
+}
+h3 {
+    color: rgb(99, 99, 246);
+}
+h4 {
+    letter-spacing: 2px;
+    font-weight: 500;
 }
