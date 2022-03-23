@@ -24,7 +24,7 @@ const days = [
 const giveaway = document.querySelector('.giveaway');
 const deadline = document.querySelector(".deadline");
 const items = document.querySelectorAll(".deadline-format h4");
-let futureDate = new Date(2022, 3, 24, 10, 30, 00);
+let futureDate = new Date(2022, 3, 26, 15, 30, 0);
 // console.log(futureDate)
 
 // Easy Data
@@ -41,5 +41,38 @@ day = days[futureDate.getDay()];
 // console.log(months[month]);
 const date = futureDate.getDate();
 
+giveaway.textContent = `Giveaway ends on ${day}, ${date} ${month} ${year} - ${hours}:${minutes}`
+// future time in ms
+const futureTime = futureDate.getTime();
 
-giveaway.textContent = `Giveaway ends on ${day}, ${date} ${month} ${year} - ${hours}:${minutes}am`
+function getRemainingTime() {
+    const today = new Date().getTime();
+    const t = futureTime - today;
+    console.log(t);
+    // 1s = 1000ms
+    // 1m = 60s
+    // 1hr = 60min
+    // 1 day = 24 hr
+
+    //Diff time denominations converted in to milliseconds
+    const oneDay = 24 * 60 * 60 * 1000;
+    const oneHour = 60 * 60 * 1000;
+    const oneMinute = 60 * 1000;
+    // calculate all values
+    let days = t / oneDay;
+    console.log(days);
+    days = Math.floor(days);
+    let hours = Math.floor((t % oneDay) / oneHour);
+    console.log(hours);
+    let minutes = Math.floor((t % oneHour) / oneMinute);
+    let seconds = Math.floor((t % oneMinute) / 1000);
+
+    // set value array
+    const values = [
+        days, hours, minutes, seconds
+    ];
+    items.forEach(function(item, index){
+        item.innerHTML = values[index];
+    })
+}
+getRemainingTime();
